@@ -72,6 +72,7 @@ public class WebFormSteps {
     public void user_enters_in_password_field(String password) {
         try {
             WebElement passwordField = driver.findElement(By.name("my-password"));
+            passwordField.clear();
             passwordField.sendKeys(password);
         } catch (Exception e) {
             TestUtils.handleException(e);
@@ -92,6 +93,7 @@ public class WebFormSteps {
     public void user_enters_in_textarea_field(String text) {
         try {
             WebElement textareaField = driver.findElement(By.name("my-textarea"));
+            textareaField.clear();
             textareaField.sendKeys(text);
         } catch (Exception e) {
             TestUtils.handleException(e);

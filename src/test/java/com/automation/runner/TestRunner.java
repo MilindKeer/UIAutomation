@@ -1,9 +1,9 @@
 package com.automation.runner;
 
-import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 
-import com.automation.utility.BrowserDriver;
+// import org.junit.AfterClass;
+// import com.automation.utility.BrowserDriver;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -17,8 +17,8 @@ import io.cucumber.junit.CucumberOptions;
 )
 public class TestRunner {
         // No need for a main method, JUnit will execute this
-        @AfterClass
-        public static void tearDown() {
-                BrowserDriver.closeBrowser();
-        }
+        // @AfterClass
+        // public static void tearDown() {
+        // BrowserDriver.closeBrowser();
+        // }
 }

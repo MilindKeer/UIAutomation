@@ -106,12 +106,18 @@ target/screenshots/
 
 ---
 
-**Next Pending Task -**
-### **Data-Driven Testing (DDT) Approach**
-
 ## Overview
 This project currently implements **UI automation using Selenium with Cucumber** and **API testing using RestAssured**.  
-While the current implementation uses **static test data** in feature files and step definitions, introducing **Data-Driven Testing (DDT)** would significantly enhance **test coverage, flexibility, and maintainability**.
+It has both feature files,
+- **webform.feature**
+This is implementation uses **static test data** in feature files and step definitions
+- **webform.feature**
+This is introducing **Data-Driven Testing (DDT)** would significantly enhance **test coverage, flexibility, and maintainability**.
+- **api-testing.feature** 
+This is for API Testing using "https://jsonplaceholder.typicode.com/posts"
+
+---
+## Data-Driven Testing (DDT) Approach
 
 ## **What is Data-Driven Testing?**
 **Data-Driven Testing (DDT)** is an approach where **test data is stored externally** (e.g., in **CSV files, Excel sheets, JSON, or databases**) and dynamically fed into test scripts.  
@@ -121,30 +127,33 @@ For a **Cucumber-Selenium framework**, we can implement DDT using:
 - **Cucumber `Scenario Outline` (built-in data table)**
 - **External file sources (CSV, Excel, JSON, or a database)**
 
-**How We Would Implement Data-Driven Testing?**
+**Here I have imoplemented using Cucumber `Scenario Outline`**
 ### **1️. Approach: Using Cucumber `Scenario Outline`**
 Instead of hardcoding values in the step definitions, we can pass test data through **Cucumber Examples Tables**.
 
 #### **Example Feature File (`webform.feature`)**
 ```gherkin
-Scenario Outline: Validate input fields with multiple data sets
-  Given User is on the web form page
-  When User enters "<text>" in the text input field
-  And User selects "<color>" from the color picker
-  And User sets the range slider to "<range>"
-  Then The text input field should contain "<text>"
-  And The color picker should show "<color>"
-  And The range slider should display "<range>"
+Scenario Outline: Validate text input, password, and dropdown selection using CSV data
+    Given User is on the web form page for DDT
+    When User enters text "<text_input>" in the text input field
+    And User enters password "<password>" in the password field
+    And User selects dropdown "<dropdown_option>" from the dropdown
+    Then The text input field should populate "<text_input>"
+    And The password field should populate "<password>"
+    And The dropdown should have populate "<dropdown_option>"
 
-  Examples:
-  | text      | color   | range |
-  | Test One  |#ff0000 | 30    |
-  | Test Two  |#00ff00 | 70    |
-  | Test Three|#0000ff | 100   |
+  Examples: 
+    | text_input | password  | dropdown_option |
+    | test_1 | password_1 | One |
+    | test_2 | password_2 | Two |
+    | test_3 | password_3 | Three |
 ```
 
 Advantage: This approach works directly within Cucumber and does not require external files.
 
+## **Next possible improvement:**
+If the number of records are more it would be more feasible to maintain them in a CSV or Excel or JASON
+This has not be implemented but below is the approach 
 ### **2. Approach: Reading Test Data from an External File**
 To make test execution more flexible, we can store test data in CSV, Excel, or JSON files (or database) and read it dynamically.
 Step1 - Storing Test Data in CSV (testdata.csv)

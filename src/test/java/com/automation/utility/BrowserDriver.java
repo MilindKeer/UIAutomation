@@ -25,7 +25,7 @@ public class BrowserDriver {
     //     return driver;
     // }
 
-
+    // get driver dynamically
     public static WebDriver getDriver() {
         if (driver == null) {  
             WebDriverManager.chromedriver().setup();  
